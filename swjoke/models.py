@@ -2,7 +2,8 @@ import uuid
 from django.db import models
 # Create your models here.
 
-class SithPlanets(models.TextChoices):
+class SithPlanets(models.Model):
+    planet_name = models.CharField(max_length=40, unique = True)
     ASHAS_REE = 'Ashas Ree'
     ATHISS = 'Athiss'
     BEGEREN = 'Begeren'
@@ -25,6 +26,33 @@ class SithPlanets(models.TextChoices):
     NFOLGAI = 'Nfolgai'
     RHELG = 'Rhelg'
     ZIOST = 'Ziost'
+
+    choices = [
+        (ASHAS_REE, 'Ashas Ree'),
+        (ATHISS, 'Athiss'),
+        (BEGEREN, 'Begeren'),
+        (BOSTHIRDA, 'Bosthirda'),
+        (CHHODOS, 'Ch\'hodos'),
+        (DROMUND_FELS, 'Dromund Fels'),
+        (DROMUND_IXIN, 'Dromund Ixin'),
+        (DROMUND_KAAS, 'Dromund Kaas'),
+        (DROMUND_KALAKAR, 'Dromund Kalakar'),
+        (KALAKAR_SIX, 'Kalakar Six'),
+        (DROMUND_TYNE, 'Dromund Tyne'),
+        (JAGUADA, 'Jaguada'),
+        (JAGUADAS_MOON, 'Jaguada\'s moon'),
+        (KALSUNOR, 'Kalsunor'),
+        (KHAR_DELBA, 'Khar Delba'),
+        (KHAR_SHIAN, 'Khar Shian'),
+        (KORRIBAN, 'Korriban'),
+        (KORRIZ, 'Korriz'),
+        (KRAYISS_TWO, 'Krayiss Two'),
+        (NFOLGAI, 'Nfolgai'),
+        (RHELG, 'Rhelg'),
+        (ZIOST, 'Ziost'),
+    ]
+
+
 
 class Recruit(models.Model):
 
