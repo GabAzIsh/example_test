@@ -1,0 +1,39 @@
+{% extends "swjoke/base.html" %}
+
+{% block title %}List of joke{% endblock %}
+
+{% block content %}
+{% if question_list %}
+
+    <fieldset class="form-group">
+        {% for question in question_list %}
+        
+        <li>{{question.question_text}}</li>
+    
+        
+        </ul>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Default radio
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label" for="exampleRadios2">
+              Second default radio
+            </label>
+          </div>
+          {% endfor %}
+    </fieldset>
+    <label for="question{{ forloop.counter }}">Disabled input</label>
+    
+
+
+
+   
+{% else %}
+    <p>No question are available.</p>
+{% endif %}
+
+{% endblock %}
