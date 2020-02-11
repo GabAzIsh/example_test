@@ -3,10 +3,13 @@
 {% block title %}Detail of joke{% endblock %}
 
 {% block content %}
-
-    <li>{{ object }}</li>
+    <h1>{{ object.recruit_name }}</h1>
+    {% for answer in object.answer_set.all %}
+    <li>{{ answer.question }}</li>
+    <li>{{ answer.answer }}</li>
     <div><br></div>
-
+        {% endfor %}
+        <li>{{ object.recruit_email }}</li>
 {% endblock %}
 
  

@@ -1,0 +1,17 @@
+{% extends "swjoke/base.html" %}
+
+{% block title %}ShadowHand Test{% endblock %}
+{% block content %}
+
+<form action="." method="POST">{% csrf_token %}
+
+    
+
+    <table>
+        {{ formset }}
+
+    </table>
+
+    <button type="submit">SUBMIT</button>
+    </form>
+    {% endblock %}

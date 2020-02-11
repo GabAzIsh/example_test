@@ -1,0 +1,32 @@
+{% extends "swjoke/base.html" %}
+
+{% block title %}List of joke{% endblock %}
+
+{% block content %}
+
+<h2>Shadow Hand test</h2>
+<form action="{% url 'swjoke:black_test' %}" method="post">
+
+    {% csrf_token %}
+
+    {{ formset.management_form }}
+
+
+    {% for form in formset %}
+    <table class="table-borderless">
+        <p>{{ form.title }}</p>
+
+        {{ form }}
+    </table>
+    <tr class="table-secondary"></tr>
+    {% endfor %}
+
+
+    <button class="btn btn-primary">Send answers</button>
+</form>
+
+
+
+
+
+{% endblock %}
