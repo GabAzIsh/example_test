@@ -7,9 +7,12 @@
 {% for sith in sith_list %}
 
 
-<p class="text-center font-weight-bolder"><a href="{% url 'swjoke:recruit_list' planet_sith_id=sith.sith_planet.pk sith_id=sith.id %}" >{{ sith.sith_name }}</a>
+<p class="text-center font-weight-bolder"><a
+                href="{% url 'swjoke:recruit_list' planet_sith_id=sith.sith_planet.pk sith_id=sith.id %}">{{ sith.sith_name }}</a>
 </p>
-
+<h6 class="text-center">Number of Shadow Hand: {{ sith.recruit_set.all.count }} </h6>
+<hr>
+<br>
 {% endfor %}
 
 

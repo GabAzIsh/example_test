@@ -11,29 +11,21 @@ from .models import Recruit, Sith, SithPlanets, Test, Question
 from .forms import RecruitForm,  AnswerFormSet
 
 
-''' def mail_sand
-send_mail('Text of email subject. Example: From Django swjoke Sith'
-    'text of email',
-    'captain_taylor@list.ru'
-    ['address of mail receiver/recepient'],
-    fail_silently=False)
-
-
-'''
-# def index(request):
-#     recipients=['kino89@list.ru']
-#     subject='From Django swjoke Sith'
-#     message='text of email'
-#     sender='captain.justy.ueki.taylor@gmail.com'
-#     send_mail(subject, message, sender, recipients)
-#     return HttpResponse('Sended')
 class IndexView(TemplateView):
     template_name = 'swjoke/index.html'
+
+
+
+
 
 class SithList(generic.ListView):
     model = Sith
     template_name = 'swjoke/sith_list.html'
     context_object_name = 'sith_list'
+
+
+
+
 
 class SithUpdateRedirect(generic.RedirectView):
     
@@ -46,13 +38,11 @@ class SithUpdateRedirect(generic.RedirectView):
             recruit.shadow_hand = sith
             recruit.save()
 # Sending email by gmail
-            send_mail(
-                'Text of email subject. Example: From Django swjoke Sith', 
-                'text of email', 
-                'captain_taylor@list.ru', 
-                [recruit.recruit_email], 
-                fail_silently=False, 
-                )
+            recipients=[recruit.recruit_email]
+            subject='From Unseriously Order of the Sith Django website'
+            message=f'{recruit.recruit_name} You are become Shadow Hand of {sith.sith_name}'
+            sender='captain.justy.ueki.taylor@gmail.com'  
+            send_mail(subject, message, sender, recipients, fail_silently=False)
 
     def dispatch(self, request, *args, **kwargs):
         self.planet_id = kwargs['planet_sith_id']
@@ -63,10 +53,11 @@ class SithUpdateRedirect(generic.RedirectView):
 
         return super().dispatch(request, *args, **kwargs)
 
-    # url = 'swjoke/recruit-list/%(planet_sith_id)/%(sith_id)/'
     pattern_name = 'swjoke:recruit_list'
     permanent = False
     query_string = True
+
+
 
 
 
@@ -75,10 +66,8 @@ class RecruitList(generic.ListView):
     def dispatch(self, request, *args, **kwargs): 
         self.planet_id = kwargs['planet_sith_id']
         self.sith_id = kwargs['sith_id']
-        print(int(self.sith_id))
-        print(Sith.objects.get(id = int(self.sith_id)))
         if len(Sith.objects.get(id = int(self.sith_id)).recruit_set.all()) >= 3:
-            return render(request, 'swjoke/index.html')
+            return render(request, 'swjoke/index.html', {'text': 'You have reached maximum number of Shadow Hand', 'color': 'alert alert-warning'})
         return super().dispatch(request, *args, **kwargs)
 
     model = Recruit
@@ -94,12 +83,17 @@ class RecruitList(generic.ListView):
         ).order_by('-recruit_name')
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get the context
+
         context = super().get_context_data(**kwargs)
-        # Create any data and add it to the context
+
         context['sith_id'] = self.sith_id
         context['planet_sith_id'] = self.planet_id
         return context
+
+
+
+
+
 class BlackTest(View):
 
     def dispatch(self, request, *args, **kwargs):        
@@ -118,20 +112,29 @@ class BlackTest(View):
         formset = AnswerFormSet( initial=d)
         return render(request, 'swjoke/black_test.html', context={'formset' : formset})
 
-
     def post(self, request):
         formset=AnswerFormSet(request.POST)
         if formset.is_valid():
             for form in formset:
                 if form.is_valid():
                     form.save()
-            return render(request, 'swjoke/index.html')
+            return render(request, 'swjoke/index.html', {'text': 'You personal information was sucsefully registrated. Sith decision will be sended to you later', 'color': 'alert alert-success'})
         return render(request, 'swjoke/black_test.html', context={'formset' : formset})
+
+
+
+
+
 
 class RecruitDetailView(generic.DetailView):
     model = Recruit
     template_name = 'swjoke/detail.html'
     context_object_name = 'object'
+
+
+
+
+
 
 class SithDetailView(generic.DetailView):
     model = Sith
@@ -140,12 +143,14 @@ class SithDetailView(generic.DetailView):
 
 
 
+
+
+
 class RecruitCreate(View):
    
     def get(self, request):
         form = RecruitForm()
         return render(request, 'swjoke/new_recruit.html', context={'form' : form})
-    
     
     def post(self, request):
         bound_form = RecruitForm(request.POST)

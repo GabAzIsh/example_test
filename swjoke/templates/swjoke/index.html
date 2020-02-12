@@ -3,6 +3,13 @@
 {% block title %}Main{% endblock %}
 
 {% block content %}
+
+{% if  text %}
+<div class="{{ color }}" role="alert">
+    <h4 class="alert-heading">{{ text }}</h4>
+  </div>
+{% endif %}
+
 <div class="d-flex justify-content-center p-2">
     <div class="btn-group btn-group-lg" role="group" aria-label="...">
         <a href="/swjoke/test" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Recruit</a>

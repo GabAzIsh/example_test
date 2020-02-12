@@ -67,7 +67,7 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.recruit.recruit_name + '_' + self.question.question_text
-#class TestChoices(models.Model):
+
 
 
     

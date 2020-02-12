@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404,redirect, render
 from .models import Recruit, SithPlanets, Test, Question, Answer
 
 class RecruitForm(forms.ModelForm):
-    
+   
     class Meta:
         model = Recruit
         fields = ['recruit_name','recruit_age', 'recruit_email', 'recruit_planet']
@@ -23,6 +23,12 @@ class RecruitForm(forms.ModelForm):
         if Recruit.objects.filter(recruit_email__iexact=recruit_email).exists():
             raise forms.ValidationError(f'{recruit_email} already exist. Email addresses must be unique.')
         return recruit_email
+
+
+
+
+
+
 
 class AnswerForm(ModelForm):
     
