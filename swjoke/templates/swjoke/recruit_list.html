@@ -1,0 +1,41 @@
+{% extends "swjoke/base.html" %}
+
+{% block title %}List of Sith{% endblock %}
+
+{% block content %}
+<h2>Shadow Hand list</h2>
+
+
+
+{% for recruit in recruit_list %}
+
+<form action="{% url 'swjoke:redirect' sith_id planet_sith_id %}" method="post">
+    {% csrf_token %}
+    {{ recruit.id }}
+    <input type="hidden" id="recruit_id" name="recruit_id" value="{{ recruit.id }}">
+    <button class="btn btn-link">{{ recruit }}</button>
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Answer</th>
+        </tr>
+    </thead>
+    {% for answer in recruit.answer_set.all %}
+
+    <tbody>
+        <td>
+            <h6 class="font-weight-bold">{{answer.question}}</h6>
+        </td>
+        <td>
+            <p class="font-italic text-uppercase">{{ answer.answer }}</p>
+        </td>
+    </tbody>
+    {% endfor %}
+
+</table>
+{% endfor %}
+
+
+{% endblock %}

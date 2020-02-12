@@ -9,10 +9,8 @@ urlpatterns = [
     path('<int:pk>/detail/', views.RecruitDetailView.as_view(), name='detail'),
     #path('<int:pk>/detail/', views.SithDetailView.as_view(), name='detail'),
     path('new/', views.RecruitCreate.as_view(), name='new_recruit_url'),
-    path('create/', views.RecruitCreateView.as_view(), name='simple_create_url'),
-    path('black_test/', views.Romb.as_view(), name='black_test'),
-    #path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
-    # 
-    # 
-    #path('shadow_hand_test/', views.ShadowHand.as_view(), name='shadow_hand_test')
+    path('black_test/', views.BlackTest.as_view(), name='black_test'),
+    path('sith/', views.SithList.as_view(), name='sith_list'),
+    path('recruit-list/<int:planet_sith_id>/<int:sith_id>/', views.RecruitList.as_view(), name='recruit_list'),
+    path('redirect/<int:sith_id>/<int:planet_sith_id>/', views.SithUpdateRedirect.as_view(), name='redirect'),
 ]

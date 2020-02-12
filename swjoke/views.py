@@ -1,133 +1,146 @@
-from django.shortcuts import get_object_or_404,redirect, render
+from django.shortcuts import get_object_or_404,redirect, render, HttpResponse
 from django.views import generic, View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
+from django.core.mail import send_mail
 
 from django.urls import reverse
 from urllib.parse import urlencode
 # Create your views here.
 from .models import Recruit, Sith, SithPlanets, Test, Question
-from .forms import RecruitForm, SimpleRecruitForm, AnswerFormSet, Simpleformset
+from .forms import RecruitForm,  AnswerFormSet
 
 
+''' def mail_sand
+send_mail('Text of email subject. Example: From Django swjoke Sith'
+    'text of email',
+    'captain_taylor@list.ru'
+    ['address of mail receiver/recepient'],
+    fail_silently=False)
+
+
+'''
+# def index(request):
+#     recipients=['kino89@list.ru']
+#     subject='From Django swjoke Sith'
+#     message='text of email'
+#     sender='captain.justy.ueki.taylor@gmail.com'
+#     send_mail(subject, message, sender, recipients)
+#     return HttpResponse('Sended')
 class IndexView(TemplateView):
     template_name = 'swjoke/index.html'
-    # return render(request, 'swjoke/index.html')
-    # base_url = reverse('swjoke:black')
-    # query_string =  urlencode({'chrom': 'What the hell MF?'})
-    # url = f'{base_url}?{query_string}'
-    # return redirect(url)
 
-class Romb(View):
+class SithList(generic.ListView):
+    model = Sith
+    template_name = 'swjoke/sith_list.html'
+    context_object_name = 'sith_list'
+
+class SithUpdateRedirect(generic.RedirectView):
+    
+    @staticmethod
+    def record_shadow_hand(recruit_id, sith_id):
+            sith_id =int(sith_id)
+            recruit_id =int(recruit_id)
+            recruit=Recruit.objects.get(id=recruit_id)
+            sith=Sith.objects.get(id=sith_id)
+            recruit.shadow_hand = sith
+            recruit.save()
+# Sending email by gmail
+            send_mail(
+                'Text of email subject. Example: From Django swjoke Sith', 
+                'text of email', 
+                'captain_taylor@list.ru', 
+                [recruit.recruit_email], 
+                fail_silently=False, 
+                )
 
     def dispatch(self, request, *args, **kwargs):
-        
-        if request.method == 'GET':
-            id = int(request.GET.get('recruit_id'))
-        elif request.method == 'POST':
-            id = int(request.POST.get('recruit_id'))
-
-        self.recruit = Recruit.objects.get(pk=id)
+        self.planet_id = kwargs['planet_sith_id']
+        self.sith_id = kwargs['sith_id']
+        if request.method == 'POST':
+            self.recruit_id = request.POST.get("recruit_id")
+            self.record_shadow_hand(self.recruit_id, self.sith_id)
 
         return super().dispatch(request, *args, **kwargs)
 
+    # url = 'swjoke/recruit-list/%(planet_sith_id)/%(sith_id)/'
+    pattern_name = 'swjoke:recruit_list'
+    permanent = False
+    query_string = True
+
+
+
+class RecruitList(generic.ListView):
+
+    def dispatch(self, request, *args, **kwargs): 
+        self.planet_id = kwargs['planet_sith_id']
+        self.sith_id = kwargs['sith_id']
+        print(int(self.sith_id))
+        print(Sith.objects.get(id = int(self.sith_id)))
+        if len(Sith.objects.get(id = int(self.sith_id)).recruit_set.all()) >= 3:
+            return render(request, 'swjoke/index.html')
+        return super().dispatch(request, *args, **kwargs)
+
+    model = Recruit
+    template_name = 'swjoke/recruit_list.html'
+    context_object_name = 'recruit_list'
+
+    def get_queryset(self):
+        """
+        Return Sith with.
+        """
+        return Recruit.objects.filter(shadow_hand=None).filter(
+            recruit_planet_id=self.planet_id
+        ).order_by('-recruit_name')
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super().get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['sith_id'] = self.sith_id
+        context['planet_sith_id'] = self.planet_id
+        return context
+class BlackTest(View):
+
+    def dispatch(self, request, *args, **kwargs):        
+        if request.method == 'GET':
+            id = int(request.GET.get('recruit_id'))
+            self.recruit = Recruit.objects.get(pk=id)
+        return super().dispatch(request, *args, **kwargs)
+
     def get(self, request):
-        #print(request)
-        print('1')
         r=self.recruit
-        print(r)
         try:
             test = q.recruit_planet.test
         except:
             test = Test.objects.get(pk=1) 
         d = [ {'question': question, 'recruit': r, 'title': question.question_text} for question in test.questions.all()]
-        print(d)
-        # for index, question in enumerate(test.questions.all(),1):
-        #     print(index, question)
-        # q1=Question.objects.get(pk=1)
-        # q2=Question.objects.get(pk=2)
-        # q3=Question.objects.get(pk=3)
-        # d1={'question': q1, 'recruit': r, 'title': q1.question_text}
-        # d2={'question': q2, 'recruit': r, 'title': q2.question_text}
-        # d3={'question': q3, 'recruit': r, 'title': q3.question_text}
-        
         formset = AnswerFormSet( initial=d)
-        # print(dir(AnswerFormSet))
-        # print(formset)
         return render(request, 'swjoke/black_test.html', context={'formset' : formset})
-    # name=self.args[chrom]
-    # print(self.chrom)
-    #    return render(request, 'swjoke/index.html')
+
 
     def post(self, request):
-
-        r=Recruit.objects.get(pk=1)
-        q1=Question.objects.get(pk=1)
-        q2=Question.objects.get(pk=2)
-        q3=Question.objects.get(pk=3)
-        d1={ 'title': ''}
-        d2={'title': ''}
-        d3={'title': ''}
-        initial=[d1, d2, d3]
-        print(request.__dict__)
-        print('Post')
-        print('No')
-        formset = AnswerFormSet(request.POST, initial=[d1, d2, d3])
-        print('formset is Yes')
-        # print(formset)
-        print('HA-ha')
-        print(request.POST)
-        if formset.is_valid():#, request.FILES
-            print('FormSet is Valid')
-        else:
-            print('Formset IS NOT valid')
-        print('No, I can\'t see this')
-        # for form in formset:
-        #     print(form)
-        #     print('tur HA-HA tur HA-HA')
-        # if formset.is_valid():
-        #     print('Valid')
-        #     t = Recruit.objects.all()
-        #     for form in formset:
-        #         p = form.cleaned_data.get('players')
-        #         scoreSave = form.save(commit=False)
-        #         scoreSave.turn = t
-        #         scoreSave.save()
-        #         scoreSave.players.add(p)
-        # else:
-        #     print('Formset not OK')
-        #     return render(request, 'scorer/game.html',
-        #           {})
-
-
-
-# class IndexView(generic.ListView):
-#     template_name = 'swjoke/test.html'
-#     context_object_name = 'question_list'
-
-#     def get_queryset(self):
-#         """
-#         Return random five  questions.
-#         """
-#         return Question.objects.order_by('?')[:3]
+        formset=AnswerFormSet(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                if form.is_valid():
+                    form.save()
+            return render(request, 'swjoke/index.html')
+        return render(request, 'swjoke/black_test.html', context={'formset' : formset})
 
 class RecruitDetailView(generic.DetailView):
     model = Recruit
     template_name = 'swjoke/detail.html'
     context_object_name = 'object'
 
-class RecruitCreateView(generic.FormView):
-    template_name = 'swjoke/contact.html'
-    form_class = SimpleRecruitForm
-    success_url = '/swjoke/'
-
 class SithDetailView(generic.DetailView):
     model = Sith
     template_name = 'swjoke/detail.html'
     context_object_name = 'object'
 
+
+
 class RecruitCreate(View):
-   
    
     def get(self, request):
         form = RecruitForm()
@@ -136,35 +149,11 @@ class RecruitCreate(View):
     
     def post(self, request):
         bound_form = RecruitForm(request.POST)
-        print(request.POST)
         if bound_form.is_valid():
             new_recruit = bound_form.save()
-            print(new_recruit.__dict__)
             base_url = reverse('swjoke:black_test')
             query_string =  urlencode({'recruit_id': new_recruit.pk })
             url = f'{base_url}?{query_string}'
             return redirect(url)
-            # return render(request, 'swjoke/black_test.html', context={'recruit_id' : new_recruit.pk })
-        else:
-            print('Yoho-ho')
-            return render(request, 'swjoke/new_recruit.html', context={'form' : bound_form})
-        print('Yoho-ho2')
+        return render(request, 'swjoke/new_recruit.html', context={'form' : bound_form})
 
-class ShadowHand(View):
-
-    
-    def get(self, request):
-        formset = Simpleformset()
-        print(formset)
-        return render(request, 'swjoke/shadow_hand_test.html', context={'formset' : formset})
-
-    def post(self, request):
-        formset=Simpleformset(request.POST)
-        print(request.__dict__)
-        print(formset.__dict__)
-        for form in formset:
-            print(form)
-        print(formset.is_valid())
-        print('Good')
-        # if formset.is_valid():
-        #     print('Yes')
