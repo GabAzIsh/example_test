@@ -13,7 +13,12 @@ from .forms import RecruitForm,  AnswerFormSet
 
 class IndexView(TemplateView):
     template_name = 'swjoke/index.html'
-
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            Test.objects.get(pk=10)
+        except:
+            return render(request, 'swjoke/error.html')
+        return super().dispatch(request, *args, **kwargs)
 
 
 

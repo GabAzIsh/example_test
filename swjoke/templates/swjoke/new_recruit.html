@@ -5,7 +5,7 @@
 {% block content %}
 
 <h1 class="mt-5">Registration</h1>
-<form action="{% url 'swjoke:new_recruit_url' %}" method="post">
+<form action="{% url 'swjoke:test' %}" method="post">
     {% csrf_token %}
 
     {% for field in form %}

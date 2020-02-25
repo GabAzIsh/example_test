@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'reviewdb',
         'USER':'postgres',
-        'PASSWORD': ' ',
+        'PASSWORD': 'Cat.iquality@gmail.com',
         'HOST': '127.0.0.1',
         'PORT': '5432'
     }
