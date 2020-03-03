@@ -1,0 +1,511 @@
+[
+{
+    "model": "swjoke.question",
+    "pk": 1,
+    "fields": {
+        "question_text": "Who are you?"
+    }
+},
+{
+    "model": "swjoke.question",
+    "pk": 2,
+    "fields": {
+        "question_text": "How are you?"
+    }
+},
+{
+    "model": "swjoke.question",
+    "pk": 3,
+    "fields": {
+        "question_text": "What do you think about the weather?"
+    }
+},
+{
+    "model": "swjoke.question",
+    "pk": 4,
+    "fields": {
+        "question_text": "Are you always nice?"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 1,
+    "fields": {
+        "planet_name": "Ashas Ree"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 2,
+    "fields": {
+        "planet_name": "Athiss"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 3,
+    "fields": {
+        "planet_name": "Begeren"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 4,
+    "fields": {
+        "planet_name": "Bosthirda"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 5,
+    "fields": {
+        "planet_name": "Ch'hodos"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 6,
+    "fields": {
+        "planet_name": "Dromund Fels"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 7,
+    "fields": {
+        "planet_name": "Dromund Ixin"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 8,
+    "fields": {
+        "planet_name": "Dromund Kaas"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 9,
+    "fields": {
+        "planet_name": "Dromund Kalakar"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 10,
+    "fields": {
+        "planet_name": "Kalakar Six"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 11,
+    "fields": {
+        "planet_name": "Dromund Tyne"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 12,
+    "fields": {
+        "planet_name": "Jaguada"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 13,
+    "fields": {
+        "planet_name": "Jaguada's moon"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 14,
+    "fields": {
+        "planet_name": "Kalsunor"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 15,
+    "fields": {
+        "planet_name": "Khar Delba"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 16,
+    "fields": {
+        "planet_name": "Khar Shian"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 17,
+    "fields": {
+        "planet_name": "Korriban"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 18,
+    "fields": {
+        "planet_name": "Korriz"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 19,
+    "fields": {
+        "planet_name": "Krayiss Two"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 20,
+    "fields": {
+        "planet_name": "Nfolgai"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 21,
+    "fields": {
+        "planet_name": "Rhelg"
+    }
+},
+{
+    "model": "swjoke.sithplanets",
+    "pk": 22,
+    "fields": {
+        "planet_name": "Ziost"
+    }
+},
+{
+    "model": "swjoke.test",
+    "pk": 1,
+    "fields": {
+        "planet": 1,
+        "unique_sith_order_code": "39702944-95c7-46fc-bf55-c3e0a6cfad53",
+        "questions": [
+            1,
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "swjoke.test",
+    "pk": 2,
+    "fields": {
+        "planet": null,
+        "unique_sith_order_code": "810f68e8-fbb1-4ba3-ada3-e9d1139a62d7",
+        "questions": [
+            2,
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "swjoke.sith",
+    "pk": 1,
+    "fields": {
+        "sith_name": "Rim",
+        "sith_planet": 1
+    }
+},
+{
+    "model": "swjoke.sith",
+    "pk": 2,
+    "fields": {
+        "sith_name": "Morant",
+        "sith_planet": 3
+    }
+},
+{
+    "model": "swjoke.sith",
+    "pk": 3,
+    "fields": {
+        "sith_name": "Doctor Dum",
+        "sith_planet": 2
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 35,
+    "fields": {
+        "recruit_planet": 2,
+        "recruit_name": "Lekha",
+        "recruit_age": 24,
+        "recruit_email": "lesha@mail.com",
+        "shadow_hand": 3
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 36,
+    "fields": {
+        "recruit_planet": 2,
+        "recruit_name": "Somali",
+        "recruit_age": 20,
+        "recruit_email": "lipkn@gmail.com",
+        "shadow_hand": 3
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 37,
+    "fields": {
+        "recruit_planet": 2,
+        "recruit_name": "Kirilenko",
+        "recruit_age": 40,
+        "recruit_email": "starikashka@vtb.com",
+        "shadow_hand": 3
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 38,
+    "fields": {
+        "recruit_planet": 1,
+        "recruit_name": "Volodya",
+        "recruit_age": 23,
+        "recruit_email": "ofigenia@ofeliya.com",
+        "shadow_hand": 1
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 39,
+    "fields": {
+        "recruit_planet": 1,
+        "recruit_name": "Vasya",
+        "recruit_age": 23,
+        "recruit_email": "boria@vsex.com",
+        "shadow_hand": 1
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 40,
+    "fields": {
+        "recruit_planet": 1,
+        "recruit_name": "Zemphira",
+        "recruit_age": 90,
+        "recruit_email": "irop@ofeliya.com",
+        "shadow_hand": null
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 41,
+    "fields": {
+        "recruit_planet": 6,
+        "recruit_name": "Shnobel",
+        "recruit_age": 46,
+        "recruit_email": "kinco@rambler.ru",
+        "shadow_hand": null
+    }
+},
+{
+    "model": "swjoke.recruit",
+    "pk": 42,
+    "fields": {
+        "recruit_planet": 5,
+        "recruit_name": "Colin",
+        "recruit_age": 45,
+        "recruit_email": "kolin_farrel@chtoto.com",
+        "shadow_hand": null
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 13,
+    "fields": {
+        "answer": "yes",
+        "question": 1,
+        "recruit": 36
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 14,
+    "fields": {
+        "answer": "yes",
+        "question": 2,
+        "recruit": 36
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 15,
+    "fields": {
+        "answer": "yes",
+        "question": 3,
+        "recruit": 36
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 16,
+    "fields": {
+        "answer": "no",
+        "question": 1,
+        "recruit": 37
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 17,
+    "fields": {
+        "answer": "no",
+        "question": 2,
+        "recruit": 37
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 18,
+    "fields": {
+        "answer": "no",
+        "question": 3,
+        "recruit": 37
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 19,
+    "fields": {
+        "answer": "no",
+        "question": 1,
+        "recruit": 38
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 20,
+    "fields": {
+        "answer": "no",
+        "question": 2,
+        "recruit": 38
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 21,
+    "fields": {
+        "answer": "no",
+        "question": 3,
+        "recruit": 38
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 22,
+    "fields": {
+        "answer": "no",
+        "question": 1,
+        "recruit": 39
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 23,
+    "fields": {
+        "answer": "yes",
+        "question": 2,
+        "recruit": 39
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 24,
+    "fields": {
+        "answer": "yes",
+        "question": 3,
+        "recruit": 39
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 25,
+    "fields": {
+        "answer": "yes",
+        "question": 1,
+        "recruit": 40
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 26,
+    "fields": {
+        "answer": "no",
+        "question": 2,
+        "recruit": 40
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 27,
+    "fields": {
+        "answer": "yes",
+        "question": 3,
+        "recruit": 40
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 28,
+    "fields": {
+        "answer": "yes",
+        "question": 1,
+        "recruit": 41
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 29,
+    "fields": {
+        "answer": "no",
+        "question": 2,
+        "recruit": 41
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 30,
+    "fields": {
+        "answer": "yes",
+        "question": 3,
+        "recruit": 41
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 31,
+    "fields": {
+        "answer": "yes",
+        "question": 1,
+        "recruit": 42
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 32,
+    "fields": {
+        "answer": "no",
+        "question": 2,
+        "recruit": 42
+    }
+},
+{
+    "model": "swjoke.answer",
+    "pk": 33,
+    "fields": {
+        "answer": "yes",
+        "question": 3,
+        "recruit": 42
+    }
+}
+]

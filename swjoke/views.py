@@ -42,7 +42,7 @@ class SithUpdateRedirect(generic.RedirectView):
             sith=Sith.objects.get(id=sith_id)
             recruit.shadow_hand = sith
             recruit.save()
-# Sending email by gmail
+    # Sending email by gmail
             recipients=[recruit.recruit_email]
             subject='From Unseriously Order of the Sith Django website'
             message=f'{recruit.recruit_name} You are become Shadow Hand of {sith.sith_name}'
@@ -54,6 +54,7 @@ class SithUpdateRedirect(generic.RedirectView):
         self.sith_id = kwargs['sith_id']
         if request.method == 'POST':
             self.recruit_id = request.POST.get("recruit_id")
+
             self.record_shadow_hand(self.recruit_id, self.sith_id)
 
         return super().dispatch(request, *args, **kwargs)
@@ -71,7 +72,7 @@ class RecruitList(generic.ListView):
     def dispatch(self, request, *args, **kwargs): 
         self.planet_id = kwargs['planet_sith_id']
         self.sith_id = kwargs['sith_id']
-        if len(Sith.objects.get(id = int(self.sith_id)).recruit_set.all()) >= 3:
+        if Sith.objects.get(id = int(self.sith_id)).recruit_set.count() >= 3:
             return render(request, 'swjoke/index.html', {'text': 'You have reached maximum number of Shadow Hand', 'color': 'alert alert-warning'})
         return super().dispatch(request, *args, **kwargs)
 
