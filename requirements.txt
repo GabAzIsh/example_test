@@ -23,7 +23,7 @@ cssselect==1.1.0
 cycler==0.10.0
 decorator==4.4.1
 defusedxml==0.6.0
-Django==3.0.2
+Django==3.0.7
 docx2txt==0.8
 EbookLib==0.17.1
 entrypoints==0.3
